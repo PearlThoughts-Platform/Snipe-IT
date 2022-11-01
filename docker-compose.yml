@@ -21,7 +21,7 @@ services:
     - snipeit-backend
 
   snipe-mariadb:
-    image: mariadb:3.14
+    image: mariadb:10.6.4-focal
     volumes:
     - db:/var/lib/mysql
     env_file:
