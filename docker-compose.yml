@@ -9,19 +9,19 @@ services:
     ports:
     - "8000:80"
     volumes:
-    - ./logs:/var/www/html/storage/logs
+    - logs:/var/www/html/storage/logs
 #mount html folder to workspcace with read write access
     - ./:/var/www/html/:rw
     depends_on:
-    - mariadb
-    - redis
+    - snipe-mariadb
+    - snipe-redis
     env_file:
     - .env.docker
     networks:
     - snipeit-backend
 
-  mariadb:
-    image: mariadb:10.6.4-focal
+  snipe-mariadb:
+    image: mariadb:latest
     volumes:
     - db:/var/lib/mysql
     env_file:
@@ -31,8 +31,8 @@ services:
     ports:
       - "3306:3306"
 
-  redis:
-    image: redis:6.2.5-buster
+  snipe-redis:
+    image: redis:latest
     networks:
     - snipeit-backend
 
@@ -47,6 +47,7 @@ services:
 
 volumes:
   db: {}
+  logs: {}
 
 networks:
   snipeit-backend: {}
