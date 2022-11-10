@@ -9,7 +9,7 @@ services:
     ports:
     - "8000:80"
     volumes:
-    - ./logs:/var/www/html/storage/logs
+    -  logs:/var/www/html/storage/logs
 #mount html folder to workspcace with read write access
     - ./:/var/www/html/:rw
     depends_on:
@@ -24,6 +24,7 @@ services:
     image: mariadb:10.6.4-focal
     volumes:
     - db:/var/lib/mysql
+    #- ./database/dbdump:/docker-entrypoint-initdb.d
     env_file:
     - .env.docker
     networks:
@@ -47,6 +48,7 @@ services:
 
 volumes:
   db: {}
+  logs: {}
 
 networks:
   snipeit-backend: {}
